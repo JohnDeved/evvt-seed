@@ -72,7 +72,6 @@ $primary = #42b983
 .con-vs-card
   padding-bottom 17px
   background #20303e !important
-  box-shadow 0 4px 25px 0 rgba(0,0,0,.3) !important
   .vs-card-header
     box-shadow 0 10px 15px 5px rgba(0,0,0,0.1) !important
     h3
@@ -81,4 +80,17 @@ $primary = #42b983
 .space
   height 20px
 
+.vue-ui-button
+  border-radius 6px !important
+
+.vue-ui-button:hover
+    background #304050 !important
+
+.vue-ui-input.round .content {
+  border-radius 17px
+}
+
+.vue-ui-input:not(.round) .content {
+  border-radius 6px
+}
 </style>
