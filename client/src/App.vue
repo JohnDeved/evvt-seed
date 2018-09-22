@@ -1,10 +1,25 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <vs-navbar v-model="activeItem" class="nabarx">
+      <!-- <vs-button vs-type="flat" vs-radius="50%" vs-icon="menu"></vs-button> -->
+
+      <vs-navbar-title>
+        Vuesax App
+      </vs-navbar-title>
+
+      <vs-spacer></vs-spacer>
+
+      <vs-navbar-item index="0">
+        <router-link to="/">Home</router-link>
+      </vs-navbar-item>
+
+      <vs-navbar-item index="1">
+        <router-link to="/about">About</router-link>
+      </vs-navbar-item>
+
+    </vs-navbar>
+
+    <router-view />
   </div>
 </template>
 
@@ -15,15 +30,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>
