@@ -4,7 +4,7 @@
       <!-- <vs-button vs-type="flat" vs-radius="50%" vs-icon="menu"></vs-button> -->
 
       <vs-navbar-title>
-        Vuesax App
+        Vuesax
       </vs-navbar-title>
 
       <vs-spacer></vs-spacer>
@@ -23,12 +23,9 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="stylus">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  text-align: center
+  color: #2c3e50
 }
 </style>
