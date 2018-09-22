@@ -1,11 +1,11 @@
-let createError = require('http-errors')
-let express = require('express')
-let path = require('path')
-let cookieParser = require('cookie-parser')
-let logger = require('morgan')
+import { RequestHandlerParams } from 'express-serve-static-core'
+import * as createError from 'http-errors'
+import * as express from 'express'
+import * as path from 'path'
+import * as cookieParser from 'cookie-parser'
+import * as logger from 'morgan'
 
-let indexRouter = require('./routes/index')
-let usersRouter = require('./routes/users')
+import * as indexRouter from './routes/index'
 
 let app = express()
 
@@ -13,14 +13,13 @@ let app = express()
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')
 
-app.use(logger('dev'))
+app.use(logger('dev') as RequestHandlerParams)
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(cookieParser())
+app.use(cookieParser() as RequestHandlerParams)
 app.use(express.static(path.join(__dirname, '..', 'client', 'dist')))
 
 app.use('/', indexRouter)
-app.use('/users', usersRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -38,4 +37,4 @@ app.use(function (err, req, res, next) {
   res.render('error')
 })
 
-module.exports = app
+export = app

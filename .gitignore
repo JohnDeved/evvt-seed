@@ -116,4 +116,4 @@ typings/
 # Serverless directories
 .serverless
 
-/server/*js
+/server/**/*js
