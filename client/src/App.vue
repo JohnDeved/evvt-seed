@@ -69,4 +69,16 @@ $primary = #42b983
   height 32px
   vertical-align middle
 
+.con-vs-card
+  padding-bottom 17px
+  background #20303e !important
+  box-shadow 0 4px 25px 0 rgba(0,0,0,.3) !important
+  .vs-card-header
+    box-shadow 0 10px 15px 5px rgba(0,0,0,0.1) !important
+    h3
+      margin 0
+
+.space
+  height 20px
+
 </style>
