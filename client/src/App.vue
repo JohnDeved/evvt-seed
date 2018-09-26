@@ -33,7 +33,7 @@ export default Vue.extend({
     active: ''
   }),
   methods: {
-    setActive: function (val) {
+    setActive: function (val: string) {
       this.active = val
     }
   }
