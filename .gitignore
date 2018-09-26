@@ -117,3 +117,5 @@ typings/
 .serverless
 
 /server/**/*js
+
+\.todo
