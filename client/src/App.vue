@@ -18,8 +18,11 @@
       <VueGroup v-model="active" class="primary inline small-indicator" indicator>
         <VueGroupButton to="/" class="flat big" value="home">Home</VueGroupButton>
         <VueGroupButton to="/about" class="flat big" value="about">About</VueGroupButton>
+        <VueGroupButton href="/auth/logout" class="flat big" value="about">Logout</VueGroupButton>
       </VueGroup>
     </vs-navbar>
+  
+    {{test}}
 
     <router-view />
   </div>
@@ -27,6 +30,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapState } from 'vuex'
 
 export default Vue.extend({
   data: () => ({
@@ -36,6 +40,11 @@ export default Vue.extend({
     setActive: function (val: string) {
       this.active = val
     }
+  },
+  computed: {
+    ...mapState({
+      test: (state: any) => state.test
+    })
   }
 })
 </script>

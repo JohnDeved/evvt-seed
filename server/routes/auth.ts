@@ -43,6 +43,11 @@ passport.deserializeUser(async function (id: any, done) {
   }
 })
 
+router.get('/logout', (req, res) => {
+  req.logout()
+  res.redirect('/')
+})
+
 router.get('/google',
   passport.authenticate('google', {
     scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/drive']

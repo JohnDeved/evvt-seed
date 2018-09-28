@@ -30,13 +30,15 @@ app.use(session({ secret: 'evvt rocks and is fair!' }))
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use('/', (req, res, next) => {
-  if (req.user || req.url !== '/') {
+app.use((req, res, next) => {
+  if (req.user || /^\/auth/.test(req.url)) {
     return next()
   }
-  res.redirect('/auth/google')
-},
-  express.static(path.join(__dirname, '..', 'client', 'dist')))
+  console.log('user not logged in!')
+  res.send('<a href="/auth/google">login</a>')
+})
+
+app.use('/', express.static(path.join(__dirname, '..', 'client', 'dist')))
 
 app.use('/api', api)
 app.use('/auth', auth)
