@@ -29,37 +29,29 @@ passport.use(new googlePassport.OAuth2Strategy({
   return done(null, user)
 }))
 
+passport.serializeUser(function (user: any, done) {
+  done(null, user.id)
+})
+
+passport.deserializeUser(async function (id: any, done) {
+  const user = await models.User.findOne({ id })
+
+  if (user) {
+    done(null, user)
+  } else {
+    done('user not found')
+  }
+})
+
 router.get('/google',
-  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }))
+  passport.authenticate('google', {
+    scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/drive']
+  }))
 
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/auth/google' }),
   function (req, res) {
     res.redirect('/')
   })
-
-router.get('/drive/callback', async (req, res) => {
-  console.log(req.query)
-  const { code, scope, state } = req.query
-  const auth = new models.Auth({ token: code, name: state })
-  await auth.save()
-
-  res.redirect('/')
-})
-
-router.get('/drive/:state', (req, res) => {
-  const { state } = req.params
-
-  const cbUrl = new URL('http:localhost:3000/api/auth')
-  const auth = new google.auth.OAuth2(process.env.CLIENT_ID, process.env.CLIENT_SECRET, cbUrl.href)
-
-  const url = auth.generateAuthUrl({
-    access_type: 'offline',
-    scope: 'https://www.googleapis.com/auth/drive',
-    state
-  })
-
-  res.redirect(url)
-})
 
 export = router

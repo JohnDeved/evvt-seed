@@ -4,11 +4,16 @@ import * as express from 'express'
 import * as path from 'path'
 import * as cookieParser from 'cookie-parser'
 import * as logger from 'morgan'
+import * as session from 'express-session'
 
 import * as dotenv from 'dotenv'
 dotenv.config()
 
 import * as passport from 'passport'
+
+import * as api from './routes/api'
+import * as auth from './routes/auth'
+import { models } from './db/shema'
 
 let app = express()
 
@@ -20,21 +25,19 @@ app.use(logger('dev') as RequestHandlerParams)
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser() as RequestHandlerParams)
-app.use(express.static(path.join(__dirname, '..', 'client', 'dist')))
+app.use(session({ secret: 'evvt rocks and is fair!' }))
 
 app.use(passport.initialize())
 app.use(passport.session())
 
-passport.serializeUser(function (user, done) {
-  done(null, user)
-})
+app.use('/', (req, res, next) => {
+  if (req.user || req.url !== '/') {
+    return next()
+  }
+  res.redirect('/auth/google')
+},
+  express.static(path.join(__dirname, '..', 'client', 'dist')))
 
-passport.deserializeUser(function (user, done) {
-  done(null, user)
-})
-
-import * as api from './routes/api'
-import * as auth from './routes/auth'
 app.use('/api', api)
 app.use('/auth', auth)
 
