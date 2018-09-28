@@ -5,7 +5,10 @@ import * as path from 'path'
 import * as cookieParser from 'cookie-parser'
 import * as logger from 'morgan'
 
-import * as indexRouter from './routes/index'
+import * as dotenv from 'dotenv'
+dotenv.config()
+
+import * as passport from 'passport'
 
 let app = express()
 
@@ -19,7 +22,21 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser() as RequestHandlerParams)
 app.use(express.static(path.join(__dirname, '..', 'client', 'dist')))
 
-app.use('/', indexRouter)
+app.use(passport.initialize())
+app.use(passport.session())
+
+passport.serializeUser(function (user, done) {
+  done(null, user)
+})
+
+passport.deserializeUser(function (user, done) {
+  done(null, user)
+})
+
+import * as api from './routes/api'
+import * as auth from './routes/auth'
+app.use('/api', api)
+app.use('/auth', auth)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
