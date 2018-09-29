@@ -1,7 +1,5 @@
 import * as express from 'express'
 import { models } from '../db/shema'
-import { google } from 'googleapis'
-import { URL } from 'url'
 
 import * as dotenv from 'dotenv'
 dotenv.config()
@@ -20,10 +18,18 @@ passport.use(new googlePassport.OAuth2Strategy({
   const { id } = profile
   let user = await models.User.findOne({ id })
 
+  const data = {
+    ...profile,
+    accessToken,
+    refreshToken
+  }
+
   if (!user) {
-    user = new models.User(profile)
+    user = new models.User(data)
 
     await user.save()
+  } else {
+    await user.update(data)
   }
 
   return done(null, user)
@@ -33,7 +39,7 @@ passport.serializeUser(function (user: any, done) {
   done(null, user.id)
 })
 
-passport.deserializeUser(async function (id: any, done) {
+passport.deserializeUser(async (id, done) => {
   const user = await models.User.findOne({ id })
 
   if (user) {
@@ -55,7 +61,7 @@ router.get('/google',
 
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/auth/google' }),
-  function (req, res) {
+  (req, res) => {
     res.redirect('/')
   })
 

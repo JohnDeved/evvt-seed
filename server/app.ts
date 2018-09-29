@@ -35,7 +35,7 @@ app.use((req, res, next) => {
     return next()
   }
   console.log('user not logged in!')
-  res.send('<a href="/auth/google">login</a>')
+  res.render('login')
 })
 
 app.use('/', express.static(path.join(__dirname, '..', 'client', 'dist')))

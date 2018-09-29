@@ -10,6 +10,8 @@ const Auth = new Schema({
 const User = new Schema({
   id: String,
   displayName: String,
+  accessToken: String,
+  refreshToken: String,
   _json: Object
 })
 
