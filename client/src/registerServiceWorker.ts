@@ -15,6 +15,15 @@ if (process.env.NODE_ENV === 'production') {
     },
     updated () {
       console.log('New content is available; please refresh.')
+      setTimeout(() => {
+        if (window.vue) {
+          (window as any).vue.$vs.notify({
+            title: 'New Client Update',
+            text: 'New content is available; please refresh.',
+            color: 'success'
+          })
+        }
+      }, 3000)
     },
     offline () {
       console.log('No internet connection found. App is running in offline mode.')

@@ -6,6 +6,8 @@ import './registerServiceWorker'
 import Vuesax from 'vuesax'
 import VueUi from '@vue/ui'
 
+import 'material-icons/iconfont/material-icons.css'
+
 Vue.use(VueUi)
 Vue.use(Vuesax, {
   theme: {
@@ -15,9 +17,13 @@ Vue.use(Vuesax, {
   }
 })
 
+declare global {
+  interface Window { vue: Vue }
+}
+
 Vue.config.productionTip = false
 
-new Vue({
+window.vue = new Vue({
   router,
   store,
   render: h => h(App)
@@ -25,4 +31,3 @@ new Vue({
 
 import 'vuesax/dist/vuesax.css'
 import '@vue/ui/dist/vue-ui.css'
-import 'material-icons/iconfont/material-icons.css'

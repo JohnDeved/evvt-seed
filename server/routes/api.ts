@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 import { google } from 'googleapis'
+import { rarbg } from 'rarbg-api-ts'
 
 const router = express.Router()
 
@@ -15,8 +16,11 @@ const getDrive = access_token => {
   })
 }
 
-router.get('/user', (req, res) => {
-  res.json(req.user)
+router.post('/rarbg/list', async (req, res) => {
+  const options = req.body
+  rarbg.list(options).then(result => {
+    res.json(result)
+  })
 })
 
 router.get('/teamdrives', (req, res) => {

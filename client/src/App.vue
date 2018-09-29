@@ -6,7 +6,7 @@
       <div @click="setActive('home')">
         <router-link to="/">
           <vs-navbar-title>
-            Vuesax App
+            evvt
           </vs-navbar-title>
         </router-link>
       </div>
@@ -18,11 +18,9 @@
       <VueGroup v-model="active" class="primary inline small-indicator" indicator>
         <VueGroupButton to="/" class="flat big" value="home">Home</VueGroupButton>
         <VueGroupButton to="/about" class="flat big" value="about">About</VueGroupButton>
-        <VueGroupButton href="/auth/logout" class="flat big" value="about">Logout</VueGroupButton>
+        <VueGroupButton href="/auth/logout" class="flat big" value="logout">Logout</VueGroupButton>
       </VueGroup>
     </vs-navbar>
-  
-    {{test}}
 
     <router-view />
   </div>
@@ -36,6 +34,7 @@ export default Vue.extend({
   data: () => ({
     active: ''
   }),
+  
   methods: {
     setActive: function (val: string) {
       this.active = val
