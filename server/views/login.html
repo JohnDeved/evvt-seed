@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>evvt</title>
   <style>
     body {
       min-height: 100vh;
       margin: 0;
+      background: black;
+      overflow: hidden;
     }
 
     #app {
@@ -17,6 +19,15 @@
       width:100%;
       justify-content: center;
       height:100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    video {
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      height: auto;
     }
 
     * {
@@ -28,6 +39,8 @@
 </head>
 <body>
   <div id="app">
+    <video src="https://ia801407.us.archive.org/5/items/TheDancingPirate/The%20Dancing%20Pirate.mp4" 
+      autoplay muted loop></video>
     <vs-row vs-justify="center">
       <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="6">
         <vs-card style="width: 200px">
@@ -50,8 +63,8 @@
       </vs-col>
     </vs-row>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vuesax/dist/vuesax.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuesax"></script>
   <script>
     new Vue({
       el: '#app',
@@ -59,6 +72,9 @@
         messaje:'Login Using Google'
       })
     })
+
+    const video = document.querySelector('video')
+    video.onloadeddata = () => (video.currentTime = Math.random() * video.duration)
   </script>
 </body>
 </html>
