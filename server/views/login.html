@@ -44,7 +44,7 @@
       autoplay muted loop></video>
     <vs-row vs-justify="center">
       <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="6">
-        <vs-card style="width: 200px">
+        <vs-card style="width: 200px; background: rgba(255, 255, 255, 0.50);">
           <div slot="header">
             <h3>
               Ahoi there, Pirate!
@@ -67,15 +67,22 @@
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuesax"></script>
   <script>
-    new Vue({
+    const vue = new Vue({
       el: '#app',
       data: () => ({
         messaje:'Login Using Google'
       })
     })
 
+    vue.$vs.loading({
+      background:'black',
+      color:'white',
+      type: 'corners'
+    })
+
     const video = document.querySelector('video')
     video.onloadeddata = () => (video.currentTime = Math.random() * video.duration)
+    video.onseeked = () => vue.$vs.loading.close()
   </script>
 </body>
 </html>
