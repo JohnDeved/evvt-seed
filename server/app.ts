@@ -35,7 +35,7 @@ app.use((req, res, next) => {
     return next()
   }
   console.log('user not logged in!')
-  res.render('login')
+  res.sendfile(path.join(__dirname, 'views', 'login.html'))
 })
 
 app.use('/', express.static(path.join(__dirname, '..', 'client', 'dist')))

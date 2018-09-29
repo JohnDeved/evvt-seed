@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    #app {
+      display: flex;
+      align-items: center;
+      width:100%;
+      justify-content: center;
+      height:100vh;
+    }
+
+    * {
+      font-family: Roboto,Avenir,Helvetica,Arial,sans-serif !important
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="https://dev.jspm.io/vuesax/dist/vuesax.css">
+</head>
+<body>
+  <div id="app">
+    <vs-row vs-justify="center">
+      <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="6">
+        <vs-card style="width: 200px">
+          <div slot="header">
+            <h3>
+              Ahoi there, Pirate!
+            </h3>
+          </div>
+          <div>
+            <span>Looks like youre lost at sea. Need a lift?</span>
+          </div>
+          <div slot="footer">
+            <vs-row vs-justify="flex-end">
+              <a href="/auth/google">
+                <vs-button vs-color="primary">Login Using Google</vs-button>
+              </a>
+            </vs-row>
+          </div>
+        </vs-card>
+      </vs-col>
+    </vs-row>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuesax/dist/vuesax.umd.min.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: () => ({
+        messaje:'Login Using Google'
+      })
+    })
+  </script>
+</body>
+</html>
