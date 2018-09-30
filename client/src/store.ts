@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     test: 'tester5',
-    user: {}
+    background: '#1d2935'
   },
   mutations: {
 
