@@ -3,7 +3,7 @@
     <vs-table :data="data">
       <template slot="header">
         <h3>
-          Torrents
+          Popular Torrents
         </h3>
       </template>
       <template slot="thead">
@@ -22,22 +22,24 @@
       </template>
 
       <template slot-scope="{data}">
-        <vs-tr class="pointer" :key="indextr" v-for="(tr, indextr) in data" >
-          <vs-td :data="data[indextr].title">
-            {{data[indextr].title}}
+        <vs-tr :key="indextr" v-for="(tr, indextr) in data" @click="$router.push('/title/' + tr.episode_info.imdb)">
+          <vs-td :data="tr">
+            <a class="pointer" @click="$router.push('/title/' + tr.episode_info.imdb)">
+                {{tr.title}}
+            </a>
           </vs-td>
 
-          <vs-td :data="data[indextr].category">
-            {{data[indextr].category}}
+          <vs-td :data="tr.category">
+            {{tr.category}}
           </vs-td>
 
-          <vs-td :data="data[indextr].seeders">
-            {{data[indextr].seeders}}
+          <vs-td :data="tr.seeders">
+            {{tr.seeders}}
           </vs-td>
 
-          <vs-td :data="data[indextr].leechers">
-            {{data[indextr].leechers}}
-          </vs-td>
+          <vs-td :data="tr.leechers">
+            {{tr.leechers}}
+          </vs-td>  
         </vs-tr>
       </template>
     </vs-table>
@@ -76,11 +78,13 @@ export default Vue.extend({
 
     const { data } = await axios.post('/api/rarbg/list', {
       sort: 'seeders',
-      format: 'json_extended'
+      format: 'json_extended',
+      limit: '100'
     })
     
     this.data = data
     console.log(data)
+
     this.$vs.loading.close()
     this.loaded = true
   }

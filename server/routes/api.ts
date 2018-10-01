@@ -23,6 +23,14 @@ router.post('/rarbg/list', async (req, res) => {
   })
 })
 
+router.post('/rarbg/imdb/:id', async (req, res) => {
+  const { id } = req.params
+  const options = req.body
+  rarbg.searchImdb(id, options).then(result => {
+    res.json(result)
+  })
+})
+
 router.get('/teamdrives', (req, res) => {
   const drive = getDrive(req.user.accessToken)
 
